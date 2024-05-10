@@ -63,6 +63,7 @@ export default function Register() {
                     />
                 </form>
 
+
             </div>
             <nav className="mt-5">
                 <Link to={'/auth/login'}>¿Ya tienes cuenta? Inicia Sesión</Link>
