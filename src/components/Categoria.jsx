@@ -1,4 +1,3 @@
-import React from 'react'
 
 export default function Categoria({categoria}) {
     const {icono,id,nombre} = categoria
