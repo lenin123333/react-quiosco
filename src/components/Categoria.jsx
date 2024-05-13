@@ -1,5 +1,7 @@
+import useQuiosco from "../hooks/useQuiosco"
 
 export default function Categoria({categoria}) {
+  const {handleClickCategoria} = useQuiosco()
     const {icono,id,nombre} = categoria
   return (
     <div className=' flex items-center gap-4 border w-full
@@ -7,7 +9,12 @@ export default function Categoria({categoria}) {
         <img src={`/img/icono_${icono}.svg`} alt="Imagen Icono" 
             className='w-12'
         />
-        <p className=' text-lg font-bold cursor-pointer truncate'>{nombre}</p>
+        <button  
+        type="button"
+        onClick={handleClickCategoria}
+        className=' text-lg font-bold cursor-pointer truncate'>
+          {nombre}
+        </button>
     </div>
   )
 }
