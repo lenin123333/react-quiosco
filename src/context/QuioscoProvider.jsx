@@ -2,10 +2,14 @@ import {  createContext } from 'react'
 
 const QuioscoContext = createContext()
 
-const QuioscoProvider = () => {
+const QuioscoProvider = ({children}) => {
+
+    const autenticado=true;
+    
     return (
         <QuioscoContext.Provider
             value={{
+                autenticado
             }}
         >
             {children}

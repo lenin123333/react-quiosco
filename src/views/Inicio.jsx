@@ -1,7 +1,10 @@
 import Productos from "../components/Productos";
 import { productos } from "../data/productos";
-
+import useQuiosco from "../hooks/useQuiosco";
 export default function Inicio() {
+
+  const {autenticado} = useQuiosco()
+  console.log(autenticado)
   return (
     <>
       <h1 className=" text-4xl font-black">Inicio</h1>
