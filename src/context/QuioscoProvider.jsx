@@ -27,6 +27,7 @@ const QuioscoProvider = ({children}) => {
     //De esta forma no agrgeamos a lo que le apliquemos destructory
     const handleAgregarPedido=({categoria_id,imagen,...producto}) =>{
         setPedido([...pedido,producto])
+        handleClickModal()
     }
     return (
         <QuioscoContext.Provider
