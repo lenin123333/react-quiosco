@@ -2,7 +2,7 @@ import useQuiosco from "../hooks/useQuiosco"
 import ResumenProducto from "./ResumenProducto"
 
 export default function Resumen() {
-  const { pedido } = useQuiosco()
+  const { pedido, } = useQuiosco()
   return (
     <aside className='w-72 h-screen overflow-y-scroll p-5'>
       <h1 className="text-4xl font-black">
@@ -17,7 +17,7 @@ export default function Resumen() {
         ) : (
           
             pedido.map(producto => (
-              <ResumenProducto key={pedido.id} producto={producto} />
+              <ResumenProducto key={producto.id} producto={producto} />
             ))
           
         )}

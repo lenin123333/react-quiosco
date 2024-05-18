@@ -1,6 +1,6 @@
 import {  createContext,useState } from 'react'
 import { categorias as categoriasDB } from '../data/categorias'
-
+import {toast} from 'react-toastify'
 const QuioscoContext = createContext()
 
 const QuioscoProvider = ({children}) => {
@@ -25,17 +25,25 @@ const QuioscoProvider = ({children}) => {
         setProducto(producto)
     }
     //De esta forma no agrgeamos a lo que le apliquemos destructory
-    const handleAgregarPedido=({categoria_id,imagen,...producto}) =>{
+    const handleAgregarPedido=({categoria_id,...producto}) =>{
         if(pedido.some( pedidoState=>pedidoState.id=== producto.id)){
             const pedidoActualizado = pedido.map(pedidoState => pedidoState.id === 
                 producto.id ? producto:pedidoState)
             setPedido(pedidoActualizado) 
+            toast.success('Guardado Correctamente')
         }else{
             setPedido([...pedido,producto])
+            toast.success('Producto Agregado')
             
         }
         handleClickModal()
         
+    }
+
+    const handleEditarCantidad = id =>{
+        const productoActualizar = pedido.filter(producto => producto.id === id)[0]
+        setProducto(productoActualizar)
+        setModal(!modal)
     }
     return (
         <QuioscoContext.Provider
@@ -48,7 +56,8 @@ const QuioscoProvider = ({children}) => {
                 producto,
                 handleSetProducto,
                 pedido,
-                handleAgregarPedido
+                handleAgregarPedido,
+                handleEditarCantidad
             }}
         >
             {children}

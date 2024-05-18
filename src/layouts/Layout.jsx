@@ -4,7 +4,8 @@ import Resumen from '../components/Resumen'
 import useQuiosco from '../hooks/useQuiosco'
 import Modal from 'react-modal'
 import ModalProducto from '../components/ModalProducto'
-
+import { ToastContainer } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
 const customStyles = {
     content: {
         top: "50%",
@@ -32,9 +33,10 @@ export default function Layout() {
 
                 <Resumen />
             </div>
-                <Modal isOpen={modal} style={customStyles}>
-                   <ModalProducto/>
-                </Modal>
+            <Modal isOpen={modal} style={customStyles}>
+                <ModalProducto />
+            </Modal>
+            <ToastContainer />
         </>
     )
 }
