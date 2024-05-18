@@ -1,4 +1,4 @@
-import {  createContext,useState } from 'react'
+import {  createContext,useEffect,useState } from 'react'
 import { categorias as categoriasDB } from '../data/categorias'
 import {toast} from 'react-toastify'
 const QuioscoContext = createContext()
@@ -10,7 +10,13 @@ const QuioscoProvider = ({children}) => {
     const [modal,setModal]= useState(false)
     const [producto,setProducto] = useState({})
     const [pedido,setPedido]=useState([])
-    
+    const[total,setTotal] = useState(0)
+
+    useEffect(()=>{
+        const nuevoTotal = pedido.reduce((total,producto)=>
+            (producto.precio * producto.cantidad) + total, 0)
+            setTotal(nuevoTotal)
+    },[pedido])
     const handleClickCategoria = id =>{
         const categoria = categorias.filter(categoria => categoria.id === id)[0]
         setCategoriaActual(categoria)
@@ -45,6 +51,13 @@ const QuioscoProvider = ({children}) => {
         setProducto(productoActualizar)
         setModal(!modal)
     }
+
+    const handleEliminarProductoPedido = id =>{
+        const pedidoActualizado = pedido.filter(producto => producto.id !== id)
+        setPedido(pedidoActualizado)
+        toast.success('Pedido Eliminado')
+
+    }
     return (
         <QuioscoContext.Provider
             value={{
@@ -57,7 +70,9 @@ const QuioscoProvider = ({children}) => {
                 handleSetProducto,
                 pedido,
                 handleAgregarPedido,
-                handleEditarCantidad
+                handleEditarCantidad,
+                handleEliminarProductoPedido,
+                total
             }}
         >
             {children}
