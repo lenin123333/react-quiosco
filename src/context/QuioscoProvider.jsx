@@ -26,8 +26,16 @@ const QuioscoProvider = ({children}) => {
     }
     //De esta forma no agrgeamos a lo que le apliquemos destructory
     const handleAgregarPedido=({categoria_id,imagen,...producto}) =>{
-        setPedido([...pedido,producto])
+        if(pedido.some( pedidoState=>pedidoState.id=== producto.id)){
+            const pedidoActualizado = pedido.map(pedidoState => pedidoState.id === 
+                producto.id ? producto:pedidoState)
+            setPedido(pedidoActualizado) 
+        }else{
+            setPedido([...pedido,producto])
+            
+        }
         handleClickModal()
+        
     }
     return (
         <QuioscoContext.Provider
